@@ -1,17 +1,27 @@
 ---
 import articlesEs from "../database/articles-es.json"
-import articlesEn from "../database/articles-en.json"
 import { formatDate, formatDateTime } from "../utils/formatDate"
-
-const backgroundVideos = [
-  "https://videos.pexels.com/video-files/29603787/12740644_1920_1080_60fps.mp4",
-  "https://videos.pexels.com/video-files/19115721/19115721-uhd_2560_1440_24fps.mp4",
-  "https://videos.pexels.com/video-files/20363056/20363056-uhd_2560_1440_30fps.mp4",
-  "https://videos.pexels.com/video-files/19886376/19886376-uhd_2560_1440_24fps.mp4",
-  "https://videos.pexels.com/video-files/27939164/12267485_2560_1440_25fps.mp4",
-  "https://videos.pexels.com/video-files/27165160/12087843_2560_1440_25fps.mp4",
-]
 ---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const videoElement = document.querySelector(
+      ".background-video source"
+    ) as HTMLVideoElement
+    const videos = [
+      "https://videos.pexels.com/video-files/29603787/12740644_1920_1080_60fps.mp4",
+      "https://videos.pexels.com/video-files/19115721/19115721-uhd_2560_1440_24fps.mp4",
+      "https://videos.pexels.com/video-files/20363056/20363056-uhd_2560_1440_30fps.mp4",
+      "https://videos.pexels.com/video-files/19886376/19886376-uhd_2560_1440_24fps.mp4",
+      "https://videos.pexels.com/video-files/27939164/12267485_2560_1440_25fps.mp4",
+      "https://videos.pexels.com/video-files/27165160/12087843_2560_1440_25fps.mp4",
+    ]
+
+    const randomIndex = Math.floor(Math.random() * videos.length)
+    videoElement.src = videos[randomIndex]
+    ;(videoElement.parentNode as HTMLMediaElement).load()
+  })
+</script>
 
 <div class="header-top">
   <p class="header-date">ES | {formatDateTime(new Date())}</p>
@@ -45,12 +55,7 @@ const backgroundVideos = [
     playsinline
     poster="src/assets/background-header.jpg"
   >
-    <source
-      src={backgroundVideos[
-        Math.floor(Math.random() * backgroundVideos.length)
-      ]}
-      type="video/mp4"
-    />
+    <source type="video/mp4" />
     <img
       src="src/assets/background-header.jpg"
       title="Your browser does not support the <video> tag"
