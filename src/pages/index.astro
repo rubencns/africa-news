@@ -1,11 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro"
+import articlesAll from "@database/articles-es.json"
+import ArticlesGrid from "@components/ArticlesGrid.astro"
 
 const { countryCode } = Astro.params
-
-if (!countryCode) {
-  return Astro.redirect("/all")
-}
 ---
 
-<Layout activeCountry={countryCode} />
+<Layout activeCountry={countryCode || "all"}>
+  <ArticlesGrid articles={articlesAll} />
+</Layout>

@@ -1,0 +1,61 @@
+---
+import type { Article } from "@models/Article"
+import { formatDate } from "@utils/formatDate"
+
+export interface Props {
+  article: Article
+}
+
+const { article } = Astro.props
+---
+
+<a
+  class="article-link"
+  href={article.url}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <article class="article">
+    <img class="article-image" src={article.image} alt={article.title} />
+    <p style={{ fontStyle: "italic" }}>
+      {formatDate(new Date(article.publishedAt))}
+    </p>
+    <h3 class="article-title">{article.title}</h3>
+    <p>{article.description}</p>
+    <div class="article-source">
+      <p>{article.source.name}</p>
+    </div>
+  </article>
+</a>
+
+<style>
+  .article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &:hover {
+      .article-title {
+        text-decoration: underline;
+      }
+    }
+
+    .article-image {
+      border-radius: 0.25rem;
+    }
+
+    .article-title {
+      font-size: 1.5rem;
+    }
+
+    .article-source {
+      margin-top: 0.5rem;
+      background-color: var(--neutral-light-color);
+      color: var(--black-color);
+      font-size: 0.875rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 1rem;
+      width: fit-content;
+    }
+  }
+</style>

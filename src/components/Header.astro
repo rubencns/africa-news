@@ -26,7 +26,7 @@ const { activeCountry } = Astro.props
       countries.map((country) => (
         <a
           href={`/${country.code}`}
-          class={`country ${activeCountry === country.code ? "active" : ""}`}
+          class={`country${activeCountry === country.code ? " active" : ""}`}
         >
           {country.icon} {country.name}
         </a>
