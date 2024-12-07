@@ -16,6 +16,13 @@ const { activeCountry } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo-white.png" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Text:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
     <title>África al Día</title>
     <ClientRouter />
   </head>
@@ -33,18 +40,32 @@ const { activeCountry } = Astro.props
   }
 
   @font-face {
-    font-family: "DM Serif Text";
+    font-family: "DM Serif Text", serif;
     src: url("/fonts/DMSerifText-Regular.ttf") format("truetype");
     font-weight: 400;
     font-display: swap;
   }
 
   @font-face {
-    font-family: "DM Serif Text";
+    font-family: "DM Serif Text", serif;
     src: url("/fonts/DMSerifText-Italic.ttf") format("truetype");
     font-weight: 400;
     font-display: swap;
     font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Cinzel", serif;
+    src: url("/fonts/Cinzel-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Cormorant Garamond", serif;
+    src: url("/fonts/CormorantGaramond-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
   }
 
   html {

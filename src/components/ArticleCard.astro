@@ -17,11 +17,11 @@ const { article } = Astro.props
 >
   <article class="article">
     <img class="article-image" src={article.image} alt={article.title} />
-    <p style={{ fontStyle: "italic" }}>
+    <p class="article-date">
       {formatDate(new Date(article.publishedAt))}
     </p>
     <h3 class="article-title">{article.title}</h3>
-    <p>{article.description}</p>
+    <p class="article-description">{article.description}</p>
     <div class="article-source">
       <p>{article.source.name}</p>
     </div>
@@ -35,17 +35,23 @@ const { article } = Astro.props
     gap: 0.5rem;
 
     &:hover {
-      .article-title {
-        text-decoration: underline;
-      }
+      text-decoration: underline;
     }
 
     .article-image {
       border-radius: 0.25rem;
     }
 
+    .article-date {
+      font-style: italic;
+    }
+
     .article-title {
       font-size: 1.5rem;
+    }
+
+    .article-description {
+      line-height: 1.4;
     }
 
     .article-source {
