@@ -1,0 +1,125 @@
+---
+import articlesAll from "@database/articles-es.json"
+import articlesArg from "@database/articles-argelia-es.json"
+import articlesEgy from "@database/articles-egipto-es.json"
+import articlesGha from "@database/articles-ghana-es.json"
+import articlesMrc from "@database/articles-marruecos-es.json"
+import articlesNga from "@database/articles-nigeria-es.json"
+import articlesKen from "@database/articles-kenia-es.json"
+import articlesSDF from "@database/articles-sudafrica-es.json"
+import articlesTza from "@database/articles-tanzania-es.json"
+import { formatDate } from "@utils/formatDate"
+import { countries } from "@constants/countries"
+import Layout from "@layouts/Layout.astro"
+import type { Article } from "@models/Article"
+import type { Country } from "@models/Country"
+
+export async function getStaticPaths() {
+  return countries.map((country) => ({
+    params: { countryCode: country.code },
+  }))
+}
+
+const { countryCode } = Astro.params
+
+const articles: Record<Country["code"], Article[]> = {
+  all: articlesAll,
+  arg: articlesArg,
+  egy: articlesEgy,
+  gha: articlesGha,
+  mrc: articlesMrc,
+  nga: articlesNga,
+  ken: articlesKen,
+  SDF: articlesSDF,
+  tza: articlesTza,
+}
+---
+
+<Layout activeCountry={countryCode}>
+  <main class="main">
+    {
+      articles[countryCode || "all"]
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+        )
+        .map((article) => (
+          <a
+            class="article-link"
+            href={article.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <article class="article">
+              <img
+                class="article-image"
+                src={article.image}
+                alt={article.title}
+              />
+              <p style={{ fontStyle: "italic" }}>
+                {formatDate(new Date(article.publishedAt))}
+              </p>
+              <h3 class="article-title">{article.title}</h3>
+              <p>{article.description}</p>
+              <div class="article-source">
+                <p>{article.source.name}</p>
+              </div>
+            </article>
+          </a>
+        ))
+    }
+  </main>
+
+  <style>
+    .main {
+      margin: 0 auto;
+      max-width: 800px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 3rem 1rem;
+
+      .article-link {
+        text-decoration: none;
+        color: var(--black-color);
+      }
+
+      .article {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &:hover {
+          .article-title {
+            text-decoration: underline;
+          }
+        }
+
+        .article-image {
+          border-radius: 0.25rem;
+        }
+
+        .article-title {
+          font-size: 1.5rem;
+        }
+
+        .article-source {
+          margin-top: 0.5rem;
+          background-color: var(--neutral-light-color);
+          color: var(--black-color);
+          font-size: 0.875rem;
+          padding: 0.4rem 0.9rem;
+          border-radius: 1rem;
+          width: fit-content;
+        }
+      }
+    }
+
+    @media (max-width: 800px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

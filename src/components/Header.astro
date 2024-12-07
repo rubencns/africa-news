@@ -1,5 +1,12 @@
 ---
-import { formatDateTime } from "../utils/formatDate"
+import { countries } from "@constants/countries"
+import { formatDateTime } from "@utils/formatDate"
+
+export interface Props {
+  activeCountry: string
+}
+
+const { activeCountry } = Astro.props
 ---
 
 <div class="header-top">
@@ -15,15 +22,16 @@ import { formatDateTime } from "../utils/formatDate"
     medios de comunicación de España.
   </p>
   <div class="country-selector">
-    <button class="country active">🇺🇳 Todos</button>
-    <button class="country">🇳🇬 Nigeria</button>
-    <button class="country">🇿🇦 Sudáfrica</button>
-    <button class="country">🇪🇬 Egipto</button>
-    <button class="country">🇲🇦 Marruecos</button>
-    <button class="country">🇲🇦 Angola</button>
-    <button class="country">🇰🇪 Kenia</button>
-    <button class="country">🇹🇿 Tanzania</button>
-    <button class="country">🇬🇭 Ghana</button>
+    {
+      countries.map((country) => (
+        <a
+          href={`/${country.code}`}
+          class={`country ${activeCountry === country.code ? "active" : ""}`}
+        >
+          {country.icon} {country.name}
+        </a>
+      ))
+    }
   </div>
 
   <video
@@ -44,7 +52,7 @@ import { formatDateTime } from "../utils/formatDate"
 </header>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const videoElement = document.querySelector(
       ".background-video source"
     ) as HTMLVideoElement
@@ -149,6 +157,7 @@ import { formatDateTime } from "../utils/formatDate"
         color: var(--black-color);
         font-family: "DM Serif Text", serif;
         font-size: 1.1rem;
+        text-decoration: none;
         cursor: pointer;
         box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 
@@ -171,6 +180,7 @@ import { formatDateTime } from "../utils/formatDate"
 
       .country-selector {
         width: 100vw;
+        padding: 0 0.5rem;
 
         .country {
           font-size: 1rem;

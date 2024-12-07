@@ -1,5 +1,12 @@
 ---
-import Header from "../components/Header.astro"
+import Header from "@components/Header.astro"
+import { ClientRouter } from "astro:transitions"
+
+export interface Props {
+  activeCountry: string
+}
+
+const { activeCountry } = Astro.props
 ---
 
 <!doctype html>
@@ -10,9 +17,10 @@ import Header from "../components/Header.astro"
     <link rel="icon" type="image/svg+xml" href="/logo-white.png" />
     <meta name="generator" content={Astro.generator} />
     <title>África al Día</title>
+    <ClientRouter />
   </head>
   <body>
-    <Header />
+    <Header activeCountry={activeCountry} />
     <slot />
   </body>
 </html>

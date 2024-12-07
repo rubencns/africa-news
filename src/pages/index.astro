@@ -1,8 +1,11 @@
 ---
-import Home from "../components/Home.astro"
-import Layout from "../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
+
+const { countryCode } = Astro.params
+
+if (!countryCode) {
+  return Astro.redirect("/all")
+}
 ---
 
-<Layout>
-  <Home />
-</Layout>
+<Layout activeCountry={countryCode} />
