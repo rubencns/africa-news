@@ -16,7 +16,6 @@ const { activeCountry } = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo-white.png" />
     <meta name="generator" content={Astro.generator} />
-
     <title>África al Día</title>
     <ClientRouter />
   </head>
@@ -116,7 +115,10 @@ const { activeCountry } = Astro.props
 
   /* END OF CSS RESET June 2024 */
 
-  h1,
+  h1 {
+    font-family: "Cinzel", serif;
+  }
+
   h2,
   h3,
   h4,
