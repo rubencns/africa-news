@@ -1,6 +1,6 @@
 export const countries = [
   {
-    name: "All",
+    name: "Todos",
     code: "all",
     icon: "🇺🇳",
   },
